@@ -19,5 +19,16 @@ const userInsertedMultiple = async (user) => {
     };
   }
 };
+const getAllUsersDetails = async () => {
+  try {
+    const data = await User.findAll();
+    return { message: "Users Fetched", data, statusCode: "200" };
+  } catch (error) {
+    throw {
+      message: "users is not fetched",
+      statusCode: "400",
+    };
+  }
+};
 
-module.exports = { userCreate, userInsertedMultiple };
+module.exports = { userCreate, userInsertedMultiple, getAllUsersDetails };
