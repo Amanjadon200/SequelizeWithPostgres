@@ -6,10 +6,18 @@ app.listen(3000, () => {
   console.log("server is listening at 3000 port number");
 });
 app.post("/user", async (req, res) => {
-  const data = await userCreate(req.body);
-  res.send(data);
+  try {
+    const data = await userCreate(req.body);
+    res.send(data);
+  } catch (error) {
+    res.send(error);
+  }
 });
 app.post("/addMultipleUser", async (req, res) => {
-  const data = await userInsertedMultiple(req.body.users);
-  res.send(data);
+  try {
+    const data = await userInsertedMultiple(req.body.users);
+    res.send(data);
+  } catch (error) {
+    res.send(error);
+  }
 });
