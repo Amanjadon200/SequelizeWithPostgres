@@ -3,6 +3,7 @@ const {
   userCreate,
   userInsertedMultiple,
   getAllUsersDetails,
+  getUser,
 } = require("./Models/userService");
 const app = express();
 app.use(express.json());
@@ -28,6 +29,14 @@ app.post("/addMultipleUser", async (req, res) => {
 app.get("/getAllUser", async (req, res) => {
   try {
     const data = await getAllUsersDetails();
+    res.send(data);
+  } catch (error) {
+    res.send(error);
+  }
+});
+app.get("/getUser", async (req, res) => {
+  try {
+    const data = await getUser();
     res.send(data);
   } catch (error) {
     res.send(error);
