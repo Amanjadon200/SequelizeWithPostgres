@@ -4,6 +4,7 @@ const {
   userInsertedMultiple,
   getAllUsersDetails,
   getUser,
+  updateUser,
 } = require("./Models/userService");
 const app = express();
 app.use(express.json());
@@ -34,7 +35,7 @@ app.get("/getAllUser", async (req, res) => {
     res.send(error);
   }
 });
-app.get("/getUser", async (req, res) => {
+app.get("/getUser", async (req, res, next) => {
   try {
     const data = await getUser();
     res.send(data);
@@ -42,7 +43,15 @@ app.get("/getUser", async (req, res) => {
     res.send(error);
   }
 });
+app.post("/updateUser", async (req, res, next) => {
+  try {
+    const data = await updateUser(req.body.name, req.body.age);
+    res.send(data);
+  } catch (error) {
+    res.send(error);
+  }
+});
 // this middleware is defined if there is not route exist
-app.use(function (req, res) {
-  res.status(404).send({ message: "not found" });
+app.use((req, res) => {
+  res.status(404).send({ message: `route is not defined"` });
 });

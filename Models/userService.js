@@ -46,17 +46,34 @@ const getUser = async () => {
     // const data = await User.findAll({
     //   order:[["age","ASC"]]
     // });
+    // const data = await User.findAll({
+    //   attributes: [
+    //     "firstName",
+    //     [sequelize.fn("SUM", sequelize.col("age")), "NetAge"],
+    //   ],
+    //   group: "firstName",
+    // });
     const data = await User.findAll({
-      attributes: [
-        "firstName",
-        [sequelize.fn("SUM", sequelize.col("age")), "NetAge"],
-      ],
-      group: "firstName",
+      where: sequelize.where(
+        sequelize.fn("CHAR_LENGTH", sequelize.col("firstName")),
+        { [Op.gte]: 6 }
+      ),
     });
     return { message: "Users Fetched", data, statusCode: "200" };
   } catch (error) {
     throw {
       message: "users is not fetched",
+      statusCode: "400",
+    };
+  }
+};
+const updateUser = async (name, age) => {
+  try {
+    const data = await User.update({ age }, { where: { firstName: name } });
+    return { message: "Users Updated", data, statusCode: "200" };
+  } catch (error) {
+    throw {
+      message: "users is not updated",
       statusCode: "400",
     };
   }
@@ -67,4 +84,5 @@ module.exports = {
   userInsertedMultiple,
   getAllUsersDetails,
   getUser,
+  updateUser,
 };
