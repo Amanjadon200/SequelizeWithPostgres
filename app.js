@@ -6,6 +6,7 @@ const {
   getUser,
   updateUser,
 } = require("./Models/userService");
+const { createStudent, fetchStudent } = require("./Models/Student/student.service");
 const app = express();
 app.use(express.json());
 app.listen(3000, () => {
@@ -46,6 +47,22 @@ app.get("/getUser", async (req, res, next) => {
 app.post("/updateUser", async (req, res, next) => {
   try {
     const data = await updateUser(req.body.name, req.body.age);
+    res.send(data);
+  } catch (error) {
+    res.send(error);
+  }
+});
+app.post("/createStudent", async (req, res) => {
+  try {
+    const data = await createStudent(req.body.users);
+    res.send(data);
+  } catch (error) {
+    res.send(error);
+  }
+});
+app.get("/fetchStudent", async (req, res) => {
+  try {
+    const data = await fetchStudent();
     res.send(data);
   } catch (error) {
     res.send(error);
