@@ -1,6 +1,7 @@
 const { Op } = require("sequelize");
 const Student = require("./student.model.js");
 const { sequelize } = require("../../index.js");
+//A Model represents a table in the database. Instances of this class represent a database row.
 const createStudent = async (students) => {
   try {
     const data = await Student.bulkCreate(students, { validate: true });
