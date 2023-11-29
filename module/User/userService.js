@@ -1,6 +1,6 @@
-const { Op } = require("sequelize");
-const { User } = require("./user");
-const { sequelize } = require("..");
+import { Op } from "sequelize";
+import User from "./user";
+import { sequelize } from "../..";
 const userCreate = async (user) => {
   try {
     const data = await User.create(user);
@@ -79,7 +79,7 @@ const updateUser = async (name, age) => {
   }
 };
 
-module.exports = {
+export {
   userCreate,
   userInsertedMultiple,
   getAllUsersDetails,

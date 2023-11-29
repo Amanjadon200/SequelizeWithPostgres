@@ -1,12 +1,12 @@
-const express = require("express");
-const {
+import express from "express";
+import {
   userCreate,
   userInsertedMultiple,
   getAllUsersDetails,
   getUser,
   updateUser,
-} = require("./Models/userService");
-const { createStudent, fetchStudent } = require("./Models/Student/student.service");
+} from "./module/User/userService";
+import { createStudent, fetchStudent } from "./module/Student/student.service";
 const app = express();
 app.use(express.json());
 app.listen(3000, () => {

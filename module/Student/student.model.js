@@ -1,5 +1,5 @@
-const { sequelize } = require("../../index.js");
-const { DataTypes } = require("sequelize");
+import { sequelize } from "../../index";
+import { DataTypes } from "sequelize";
 const Student = sequelize.define(
   "student",
   {
@@ -32,4 +32,4 @@ const Student = sequelize.define(
     timestamps: false,
   }
 );
-module.exports = Student;
+export default Student;

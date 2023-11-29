@@ -1,6 +1,6 @@
-const { Op } = require("sequelize");
-const Student = require("./student.model.js");
-const { sequelize } = require("../../index.js");
+import { Op } from "sequelize";
+import Student from "./student.model";
+import { sequelize } from "../../index";
 //A Model represents a table in the database. Instances of this class represent a database row.
 const createStudent = async (students) => {
   try {
@@ -32,4 +32,4 @@ const fetchStudent = async () => {
     throw { message: "users are not fetched", statusCode: 400 };
   }
 };
-module.exports = { createStudent, fetchStudent };
+export { createStudent, fetchStudent };

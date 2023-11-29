@@ -1,7 +1,7 @@
-const bcrypt = require("bcrypt");
-const zlib = require("zlib");
-const { sequelize } = require("../index.js");
-const { DataTypes } = require("sequelize");
+import bcrypt from "bcrypt";
+import zlib from "zlib";
+import { sequelize } from "../../index";
+import { DataTypes } from "sequelize";
 const User = sequelize.define(
   "User",
   {
@@ -50,9 +50,26 @@ const User = sequelize.define(
     timestamps: false,
   }
 );
-module.exports = { User };
-// Base64 encoding is a form of encoding, not encryption. 
+export default User;
+// Base64 encoding is a form of encoding, not encryption.
 // It's designed to represent binary data in a text format,
 //  and it is easily decodable. The purpose of Base64 encoding
 //   is not to provide secrecy or security but rather to ensure
 //    that binary data can be safely transmitted and stored as text.
+
+// When you use .toString('base64') on a binary data (such as a Buffer) in Node.js,
+//  the length of the resulting Base64-encoded string is influenced by the size of the binary data.
+
+// The formula to calculate the length of the Base64-encoded string is as follows:
+
+// Base64 length = ⌈8 ×binary data length] /6
+// Here's a brief explanation:
+
+// Each character in the Base64-encoded string represents 6 bits of the original binary data.
+// To find the length of the Base64-encoded string, you take the size of the binary data in
+//  bits (8 bits per byte) and divide it by 6.
+// The result is rounded up to the nearest whole number, as Base64 encoding always produces a
+//  string length that is a multiple of 4.
+// Keep in mind that this is an approximation because Base64 encoding doesn't handle incomplete
+// chunks gracefully. If the binary data length is not a multiple of 3, padding characters ('=')
+// are added to make it a multiple of 4.
