@@ -11,6 +11,7 @@ const User = sequelize.define(
       allowNull: false,
       validate: {
         len: [4, 6],
+        // isIn: [["aman", "naman"]],
       },
       get() {
         const rawValue = this.getDataValue("firstName");
@@ -23,6 +24,21 @@ const User = sequelize.define(
     },
     age: {
       type: DataTypes.INTEGER,
+      validate: {
+        // isInt: true, was not working  may be sequelize consider "12" as 12 internally type casting
+        //  if possible then custom validator added
+        isInteger(value) {
+          // console.log(this,"_______________")
+          if (typeof value !== "number") {
+            throw "age must be an integer";
+          }
+        },
+        isMature(value) {
+          if (value < 18) {
+            throw "not mature!";
+          }
+        },
+      },
     },
     password: {
       type: DataTypes.STRING,
