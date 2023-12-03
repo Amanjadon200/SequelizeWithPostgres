@@ -25,5 +25,8 @@
     "url": "https://github.com/Amanjadon200/SequelizeWithPostgres/issues"
   },
   "homepage": "https://github.com/Amanjadon200/SequelizeWithPostgres#readme",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "sequelize-cli": "^6.6.2"
+  }
 }

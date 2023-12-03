@@ -53,25 +53,34 @@ const getUser = async () => {
     //   ],
     //   group: "firstName",
     // });
-    const data = await User.findAll({
-      where: sequelize.where(
-        sequelize.fn("CHAR_LENGTH", sequelize.col("firstName")),
-        { [Op.gte]: 6 }
-      ),
+    // const data = await User.findAll({
+    //   where: sequelize.where(
+    //     sequelize.fn("CHAR_LENGTH", sequelize.col("firstName")),
+    //     { [Op.gte]: 6 }
+    //   ),
+    // });
+    const [results, metadata] = await sequelize.query(`Select * from "Users" LIMIT 2`, {
+      model: User,
     });
-    return { message: "Users Fetched", data, statusCode: "200" };
+    return { message: "Users Fetched", results, statusCode: "200" };
   } catch (error) {
+    console.log(error);
     throw {
       message: "users is not fetched",
       statusCode: "400",
     };
   }
 };
-const updateUser = async (name, age) => {
+const updateUser = async (firstName, age) => {
   try {
-    const data = await User.update({ age }, { where: { firstName: name } });
-    return { message: "Users Updated", data, statusCode: "200" };
+    // const data = await User.update({ age }, { where: { firstName: name } });
+    const [results, metadata] = await sequelize.query(
+      `UPDATE "Users" SET age = '${age}' WHERE "firstName" = '${firstName}'`
+    );
+    console.log(results, "*******//*******", metadata);
+    return { message: "Users Updated", results, statusCode: "200" };
   } catch (error) {
+    console.warn(error);
     throw {
       message: "users is not updated",
       statusCode: "400",
